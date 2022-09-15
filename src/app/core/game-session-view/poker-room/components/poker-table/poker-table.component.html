@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="column top">
+    <app-choice-user-card
+      *ngFor="let player of players"
+      [player]="player"
+    ></app-choice-user-card>
+  </div>
+  <div class="column mid">
+    <div class="left"></div>
+    <div class="table">
+      <div>{{ pickCard }}</div>
+    </div>
+    <div class="right"></div>
+  </div>
+  <div class="column bottom">
+    <app-choice-user-card
+      *ngFor="let player of players"
+      [player]="player"
+    ></app-choice-user-card>
+  </div>
+</div>

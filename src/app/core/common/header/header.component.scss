@@ -1,0 +1,20 @@
+@import '../../../../var.scss';
+
+.container {
+  display: flex;
+  height: 10vh;
+  background-color: $tertiary;
+  .invite-btn,
+  .home-btn {
+    margin: auto;
+  }
+  .home-btn {
+    cursor: pointer;
+    color: $primary;
+    font-weight: bold;
+  }
+  .home-btn:hover,
+  .invite-btn:hover {
+    scale: 1.05;
+  }
+}

@@ -1,0 +1,11 @@
+<div class="container">
+  <h3 class="title">Choose your card</h3>
+
+  <div class="container-cards">
+    <app-vote-card
+      *ngFor="let card of cardValues"
+      [card]="card"
+      class="card"
+    ></app-vote-card>
+  </div>
+</div>

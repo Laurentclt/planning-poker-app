@@ -1,0 +1,24 @@
+@import '../../../../../../../../var.scss';
+
+:host {
+  font-weight: 900;
+}
+.card {
+  background-color: $selected;
+  height: 60px;
+  width: 30px;
+  border-radius: 11px;
+  color: $primary;
+  margin: auto;
+  border: solid 2px $primary;
+  .value {
+    display: block;
+    transform: translateY(-50%);
+    position: relative;
+    top: 50%;
+    text-align: center;
+  }
+}
+p {
+  margin: 5px 0;
+}

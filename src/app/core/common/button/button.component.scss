@@ -1,0 +1,11 @@
+@import '../../../../var.scss';
+
+button {
+  border: solid 2px $primary;
+  background-color: $white;
+  color: $primary;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

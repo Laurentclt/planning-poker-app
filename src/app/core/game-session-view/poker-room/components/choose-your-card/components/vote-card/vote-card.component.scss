@@ -1,0 +1,21 @@
+@import '../../../../../../../../var.scss';
+.card {
+  cursor: pointer;
+  width: 30px;
+  height: 60px;
+  background-color: $tertiary;
+  border-radius: 11px;
+  border: solid 2px $primary;
+  .value {
+    color: $primary;
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.card:hover {
+  scale: 1.1;
+  background-color: white;
+}

@@ -1,0 +1,11 @@
+/* Add application styles & imports to this file! */
+@import './var.scss';
+
+body {
+  margin: 0;
+  min-width: 400px;
+}
+
+.active {
+  text-decoration: underline $primary 2px;
+}

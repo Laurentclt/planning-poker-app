@@ -1,0 +1,13 @@
+@import '../../../../../../var.scss';
+
+.container {
+  display: flex;
+  flex-flow: column;
+  .container-cards {
+    display: flex;
+    justify-content: space-around;
+  }
+  .title {
+    text-align: center;
+  }
+}

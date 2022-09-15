@@ -1,0 +1,32 @@
+@import '../../../../../../var.scss';
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+.column {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mid {
+  .table {
+    flex: 2;
+    border-radius: 20px;
+    background-color: $secondary;
+    height: 100px;
+    margin: 10px auto;
+    div {
+      font-weight: 700;
+      text-align: center;
+      position: relative;
+      top: 50%;
+      translate: 0 -50%;
+    }
+  }
+  .right,
+  .left {
+    flex: 1;
+  }
+}
