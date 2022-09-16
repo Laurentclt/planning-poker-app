@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "poker-planning-database": {
+      "hosting": {
+        "demo": [
+          "poker-planning-database"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "poker-planning-database"
+  }
+}
