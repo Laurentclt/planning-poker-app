@@ -1,5 +1,5 @@
 export interface Player {
-  id: string;
+  id?: string;
   name?: string;
   cardValue?: number;
   admin?: boolean;

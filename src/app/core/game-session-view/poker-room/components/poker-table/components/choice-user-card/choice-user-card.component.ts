@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UsersDbService } from 'src/services/users-db.service';
 import { Player } from '../../../../../../../models/player.model';
+
+
 
 @Component({
   selector: 'app-choice-user-card',
@@ -10,7 +13,11 @@ export class ChoiceUserCardComponent implements OnInit {
   @Input()
   player: Player;
 
-  constructor() {}
+  constructor(private usersDbService: UsersDbService) {}
 
   ngOnInit() {}
+
+  deleteUser() {
+    this.usersDbService.deleteUser()
+  }
 }

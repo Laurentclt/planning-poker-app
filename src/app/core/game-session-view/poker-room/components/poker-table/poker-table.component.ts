@@ -14,6 +14,10 @@ export class PokerTableComponent implements OnInit {
   constructor(private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-    this.usersDbService.getUsers().subscribe((data) => (this.players = data));
+    this.usersDbService.getUsers().subscribe(data => this.players = data)
+  }
+
+  addUser() {
+    this.usersDbService.addUser()
   }
 }

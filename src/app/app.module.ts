@@ -15,9 +15,16 @@ import { HomeComponent } from './core/home-view/home/home.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, AppRoutingModule, provideFirebaseApp(() => initializeApp(environment.firebase)), provideFirestore(() => getFirestore())],
+  imports: [BrowserModule, FormsModule, AppRoutingModule,
+  AngularFireModule.initializeApp(environment.firebaseConfig),
+  provideFirestore(() => getFirestore()),
+  AngularFirestoreModule],
+
+
   declarations: [
     AppComponent,
     PokerRoomComponent,
