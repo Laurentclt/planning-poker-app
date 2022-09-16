@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
   selector: 'app-vote-card',
@@ -11,12 +12,13 @@ export class VoteCardComponent implements OnInit {
   isSelected: boolean;
 
 
-  constructor() {}
+  constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {}
 
   toggleCard() {
     
   }
+ 
   
 }

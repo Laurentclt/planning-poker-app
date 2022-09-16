@@ -17,7 +17,12 @@ export class ChoiceUserCardComponent implements OnInit {
 
   ngOnInit() {}
 
-  deleteUser() {
-    this.usersDbService.deleteUser()
+  deleteUser(data: any) {
+    console.log(data)
+     this.usersDbService.deleteUser(data.player.id)
+  }
+  updateCard(data) {
+    console.log(data)
+    this.usersDbService.updateUser(data.player.id, data.player.cardValue + 1)
   }
 }

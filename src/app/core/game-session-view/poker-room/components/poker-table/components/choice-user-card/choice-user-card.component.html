@@ -1,4 +1,4 @@
-<div class="card" (click)="deleteUser()">
+<div class="card" (dblclick)="deleteUser(this)" (click)="updateCard(this)">
   <div class="value" *ngIf="player.cardValue">
     {{ player.cardValue }}
   </div>
