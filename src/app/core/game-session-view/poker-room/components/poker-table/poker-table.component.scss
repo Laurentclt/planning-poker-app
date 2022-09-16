@@ -1,28 +1,27 @@
 @import '../../../../../../var.scss';
-
-.container {
-  width: 80%;
-  margin: auto;
+:host {
+  width: 100%;
 }
+
 .column {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .mid {
   .table {
+    display: flex;
     flex: 2;
     border-radius: 20px;
     background-color: $secondary;
     height: 100px;
-    margin: 10px auto;
+    margin: 10px 0;
+    justify-content: center;
+    align-items: center;
     div {
       font-weight: 700;
-      text-align: center;
-      position: relative;
-      top: 50%;
-      translate: 0 -50%;
     }
   }
   .right,

@@ -1,7 +1,6 @@
 .container {
   display: flex;
   height: 90vh;
-  .btn-start {
-    margin: auto;
-  }
+  justify-content: center;
+  align-items: center;
 }

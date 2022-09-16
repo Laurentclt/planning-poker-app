@@ -4,17 +4,15 @@
   display: flex;
   flex-flow: column;
   justify-content: space-around;
+  align-items: center;
 }
 .poker-table {
-  background-color: $white;
-  height: 50vh;
   width: 100%;
   max-width: 800px;
-  margin: 0 auto;
+  justify-content: center;
   display: flex;
 }
 .pick-card {
   width: 90%;
   max-width: 800px;
-  margin: 0 auto;
 }
