@@ -1,8 +1,8 @@
 <app-header></app-header>
+<app-modal-ask-name class="modal" (sendPlayerName)="getPlayerName($event)" *ngIf="!closeModal"></app-modal-ask-name>
 <div class="container">
   <div class="poker-table">
-  <app-poker-table ></app-poker-table>
+  <app-poker-table [players]="players"></app-poker-table>
   </div>
-
-  <app-choose-your-card class="pick-card"></app-choose-your-card>
+  <app-choose-your-card class="pick-card" [players]="players"></app-choose-your-card>
 </div>

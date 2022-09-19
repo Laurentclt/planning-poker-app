@@ -13,6 +13,7 @@ export const environment = {
     apiKey: "AIzaSyA6XFozVBg6KR_gPaHs9hBnDvc_nZuSJjs",
     authDomain: "poker-planning-database.firebaseapp.com",
     projectId: "poker-planning-database",
+    locationId: 'europe-west',
     storageBucket: "poker-planning-database.appspot.com",
     messagingSenderId: "1049852565698",
     appId: "1:1049852565698:web:8f326ee1f70f2a822ac35b"

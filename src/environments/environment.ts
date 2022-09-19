@@ -15,6 +15,7 @@ export const environment = {
     projectId: "poker-planning-database",
     storageBucket: "poker-planning-database.appspot.com",
     messagingSenderId: "1049852565698",
-    appId: "1:1049852565698:web:8f326ee1f70f2a822ac35b"
+    appId: "1:1049852565698:web:8f326ee1f70f2a822ac35b",
+    locationId: 'europe-west',
   }
 }

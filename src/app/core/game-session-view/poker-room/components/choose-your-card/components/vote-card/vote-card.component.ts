@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
@@ -9,16 +9,17 @@ import { UsersDbService } from 'src/services/users-db.service';
 export class VoteCardComponent implements OnInit {
   @Input()
   card: number;
-  isSelected: boolean;
 
+  @Output()
+  changeCardValue = new EventEmitter<number>()
+
+  isSelected: boolean;
 
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {}
 
-  toggleCard() {
-    
+  selectCard(cardValue: number) {
+    this.changeCardValue.emit(cardValue)
   }
- 
-  
 }

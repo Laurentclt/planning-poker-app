@@ -9,25 +9,24 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } fr
 })
 export class UsersDbService {
   playersCollection: AngularFirestoreCollection<Player>;
-  players: Observable<Player[]>
+  players: Observable<Player[]>;
+  currentUser: Player;
+  afs: AngularFirestore;
 
   constructor(afs: AngularFirestore) {
     this.playersCollection = afs.collection<Player>('players')
     this.players = afs.collection<Player>('players').valueChanges();
+    this.afs = afs
   }
-
-  // getUsers(): Observable<Player> {
-  //   // return this.players
-  //   // return  this.playersCollection.snapshotChanges()
-  //   //   .pipe(map(changes => changes.map(c => ({ id : c.payload.doc.id, ...c.payload.doc.data()}))))
-  // }
   
-   
-  addUser() {
-    this.playersCollection
-    .add({admin: false, cardValue: 5, name: "test"})
+  addUser(playerName: string) {
+    const id = this.afs.createId();
+    const newPlayer: Player = { id, name: playerName, admin: false, cardValue: null };
+    this.playersCollection.doc(id).set(Object.assign({}, newPlayer));
+    this.currentUser = newPlayer
   }
-  updateUser(id: string, value: number) {
+  
+  updateUserCard(id: string, value: number) {
     this.playersCollection.doc(id).update({cardValue: value })
   }
 

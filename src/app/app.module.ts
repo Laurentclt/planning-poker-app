@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { ModalAskNameComponent } from './core/common/modal-ask-name/modal-ask-name.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule,
@@ -34,6 +35,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     VoteCardComponent,
     ButtonComponent,
     HomeComponent,
+    ModalAskNameComponent
   ],
   bootstrap: [AppComponent],
 })

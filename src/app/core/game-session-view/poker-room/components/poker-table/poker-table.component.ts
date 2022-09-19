@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Component, Input, OnInit } from '@angular/core';
 import { UsersDbService } from '../../../../../../services/users-db.service';
 import { Player } from '../../../../../models/player.model';
 
@@ -9,18 +8,14 @@ import { Player } from '../../../../../models/player.model';
   styleUrls: ['./poker-table.component.scss'],
 })
 export class PokerTableComponent implements OnInit {
-  pickCard: string = 'pick your cards !';
+  @Input()
   players: Array<Player>;
+
+  pickCard: string = 'pick your cards !';
 
   constructor(private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-    this.usersDbService.playersCollection.snapshotChanges()
-    .pipe(map(changes => changes.map(c => ({ id : c.payload.doc.id, ...c.payload.doc.data()}))))
-    .subscribe( data => {this.players = data})
-  }
 
-  addUser() {
-    this.usersDbService.addUser()
   }
 }

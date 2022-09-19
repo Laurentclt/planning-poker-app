@@ -3,6 +3,7 @@
 
   <div class="container-cards">
     <app-vote-card
+      (changeCardValue)="newCardValue($event)"
       *ngFor="let card of cardValues"
       [card]="card"
       class="card"

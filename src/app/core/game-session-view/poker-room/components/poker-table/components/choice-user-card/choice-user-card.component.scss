@@ -2,20 +2,23 @@
 
 :host {
   font-weight: 900;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 .card {
   background-color: $selected;
   height: 60px;
   width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 11px;
   color: $primary;
   border: solid 2px $primary;
   .value {
-    display: block;
-    transform: translateY(-50%);
-    position: relative;
-    top: 50%;
-    text-align: center;
+    color: $white;
   }
 }
 p {
