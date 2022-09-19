@@ -12,7 +12,6 @@ import { VoteCardComponent } from './core/game-session-view/poker-room/component
 import { ButtonComponent } from './core/common/button/button.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './core/home-view/home/home.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';

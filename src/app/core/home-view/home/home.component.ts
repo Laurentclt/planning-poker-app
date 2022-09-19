@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   message: string = 'Start new game';
+  gameUrl: string = '1'
 
   constructor() {}
 
