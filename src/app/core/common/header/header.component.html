@@ -7,7 +7,8 @@
   >
     Home
   </div>
-  <div class="invite-btn">
+  <div *ngIf="route !== '/' " class="invite-btn" (click)="toggleModal()">  
     <app-button  message="Invite players"></app-button>
   </div>
 </div>
+<app-modal-invite-players *ngIf="showModal" (emitModal)="toggleModal()"></app-modal-invite-players>

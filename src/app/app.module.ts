@@ -17,6 +17,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ModalAskNameComponent } from './core/common/modal-ask-name/modal-ask-name.component';
+import { ModalInvitePlayersComponent } from './core/common/modal-invite-players/modal-invite-players.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule,
@@ -35,7 +36,8 @@ import { ModalAskNameComponent } from './core/common/modal-ask-name/modal-ask-na
     VoteCardComponent,
     ButtonComponent,
     HomeComponent,
-    ModalAskNameComponent
+    ModalAskNameComponent,
+    ModalInvitePlayersComponent
   ],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  route = this.router.url
+  showModal: boolean = false;
+  
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  toggleModal() {
+    console.log('toogle')
+    this.showModal = !this.showModal;
+  }
+
+ 
 }

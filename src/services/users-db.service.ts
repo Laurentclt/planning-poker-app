@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { of, from, Observable, filter, } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Player } from '../app/models/player.model';
-import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 
 @Injectable({
@@ -20,6 +20,8 @@ export class UsersDbService {
   }
   
   addUser(playerName: string) {
+    // to do : first player created in the collection is admin
+    // this.afs.collection('players' , ref => ref.limit(1))
     const id = this.afs.createId();
     const newPlayer: Player = { id, name: playerName, admin: false, cardValue: null };
     this.playersCollection.doc(id).set(Object.assign({}, newPlayer));

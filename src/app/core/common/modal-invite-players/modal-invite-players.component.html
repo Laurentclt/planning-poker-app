@@ -1,0 +1,7 @@
+<div class="container" (click)="closeModal($event)" *ngIf="showModal">
+    <div class="modal" (click)="cancelAction($event)">
+        <h3>Invite players</h3>
+        <input type="text" [(ngModel)]="urlGameSession">
+        <button> Copy invitation link</button>
+    </div>
+</div>
