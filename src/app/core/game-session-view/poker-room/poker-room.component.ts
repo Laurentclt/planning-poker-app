@@ -12,21 +12,25 @@ import { UsersDbService } from 'src/services/users-db.service';
 export class PokerRoomComponent implements OnInit {
 
   playerName: string;
-  closeModal: boolean = false;
+  closeModal: boolean;
   players: Array<Player>;
 
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-    this.usersDbService.playersCollection.valueChanges()
-    .subscribe( data => this.players = data)
-  }
+     // this.usersDbService.players
+    // .subscribe( data => console.log('data', data))
+    this.usersDbService.gameSessionsCollection.doc(this.usersDbService.currentGameSessionId).collection('players')
+    .valueChanges().subscribe(data => this.players = data)
 
-  getPlayerName(playerName : string) {
+    // do I have to set currentUser in LocalStorage so this modal will not show even if the user refresh ?
+    this.usersDbService.currentUser === undefined? this.closeModal = false : this.closeModal = true
+  }
+  getPlayerName(playerName : string): void {
     this.playerName = playerName
     this.closeModal = true
     this.usersDbService.addUser(playerName)
   }
-  changeCardValue(player: DocumentChange) {
-  }
+  // changeCardValue(player: DocumentChange) {
+  // }
 }

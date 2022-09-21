@@ -1,9 +1,8 @@
 <app-header></app-header>
 <div class="container">
-  <!-- change button bg to blue -->
   <app-button
+    (click)="createGameSession()"
     [message]="message"
     class="btn-start"
-    [routerLink]="'game/' + gameUrl"
   ></app-button>
 </div>

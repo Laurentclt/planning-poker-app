@@ -5,7 +5,7 @@ import { HomeComponent } from './core/home-view/home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'game/:id', component: PokerRoomComponent },
+  { path: ':id', component: PokerRoomComponent },
 ];
 
 @NgModule({

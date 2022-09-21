@@ -16,8 +16,7 @@ export class ModalAskNameComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sendName(value: string) {
-    console.log(value)
+  sendName(value: string): void {
     this.sendPlayerName.emit(value)
   }
 }
