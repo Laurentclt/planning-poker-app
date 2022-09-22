@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UsersDbService } from 'src/services/users-db.service';
+
 
 @Component({
   selector: 'app-vote-card',
@@ -15,7 +15,7 @@ export class VoteCardComponent implements OnInit {
 
   isSelected: boolean;
 
-  constructor( private usersDbService: UsersDbService) {}
+  constructor() {}
 
   ngOnInit() {}
 }

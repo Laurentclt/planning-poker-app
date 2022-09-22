@@ -8,8 +8,6 @@ import { UsersDbService } from 'src/services/users-db.service';
   styleUrls: ['./choose-your-card.component.scss'],
 })
 export class ChooseYourCardComponent implements OnInit {
-  @Input()
-  players: Array<Player>
   currentSelectedCard: number;
   classical: Array<number> = [1, 2, 3, 5, 8, 13, 20, 30]
   cardValues: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

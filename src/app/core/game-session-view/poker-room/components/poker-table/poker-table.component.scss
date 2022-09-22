@@ -11,9 +11,10 @@
 }
 
 .mid {
+  justify-content: space-between;
   .table {
     display: flex;
-    flex: 3;
+    width: 80%;
     border-radius: 20px;
     background-color: $secondary;
     height: 100px;
@@ -23,9 +24,5 @@
     div {
       font-weight: 700;
     }
-  }
-  .right,
-  .left {
-    flex: 1;
   }
 }

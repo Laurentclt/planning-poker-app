@@ -1,20 +1,30 @@
 <div class="container">
   <div class="column top">
     <app-choice-user-card
-      *ngFor="let player of players"
+      *ngFor="let player of getPlayersFilter(playersTop)"
       [player]="player"
-    >allo</app-choice-user-card>
+    ></app-choice-user-card>
   </div>
   <div class="column mid">
-    <div class="left"></div>
+    <div class="left">
+      <app-choice-user-card
+      *ngFor="let player of getPlayersFilter(playersLeft)"
+      [player]="player"
+    ></app-choice-user-card>
+    </div>
     <div class="table" >
       <div>{{ pickCard }}</div>
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <app-choice-user-card
+      *ngFor="let player of getPlayersFilter(playersRight)"
+      [player]="player"
+    ></app-choice-user-card>
+    </div>
   </div>
   <div class="column bottom">
     <app-choice-user-card
-      *ngFor="let player of players"
+      *ngFor="let player of getPlayersFilter(playersBottom)"
       [player]="player"
     ></app-choice-user-card>
   </div>
