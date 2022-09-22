@@ -5,6 +5,7 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
+  align-items: center;
 }
 .card {
   background-color: $selected;
@@ -20,6 +21,11 @@
     color: $white;
   }
 }
-p {
+.name {
+  min-width: 50px;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 5px 0;
+  text-align: center;
 }

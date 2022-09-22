@@ -12,6 +12,8 @@ import { Player } from '../../../../../../../models/player.model';
 export class ChoiceUserCardComponent implements OnInit {
   @Input()
   player: Player;
+  @Input()
+  revealCard: boolean;
 
   constructor(private usersDbService: UsersDbService) {}
 

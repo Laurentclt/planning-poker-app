@@ -1,6 +1,6 @@
 <div class="card" (dblclick)="deleteUser(this.player)">
-  <div class="value" *ngIf="player.cardValue">
+  <div class="value" *ngIf="player.cardValue && revealCard">
     {{ player.cardValue }}
   </div>
 </div>
-<p>{{ player.name }}</p>
+<p class="name">{{ player.name }}</p>

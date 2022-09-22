@@ -10,33 +10,36 @@ import { Player } from '../../../../../models/player.model';
 export class PokerTableComponent implements OnInit {
   // @Input()
   // players: Array<Player>;
+  currentUser: Player;
   playersTop: Array<Player> = [];
   playersBottom: Array<Player> = [];
   playersLeft: Array<Player> = [];
   playersRight: Array<Player> = [];
 
   pickCard: string = 'pick your cards !';
+  revealCard: boolean = false;
 
-  constructor(private usersDbService: UsersDbService) {
-    
-  }
+  constructor(private usersDbService: UsersDbService) { }
 
   ngOnInit() {
+    this.currentUser = this.usersDbService.currentUser
     this.usersDbService.players.subscribe( data => {
       this.playersBottom =[];
-      this.playersBottom.push(data[0], data[4], data[6], data[8], data[10], data[12])
+      this.playersBottom.push(data[0], data[2], data[6], data[8], data[10], data[12], data[16], data[18])
       this.playersTop =[];
-      this.playersTop.push(data[1], data[5], data[7], data[9], data[11], data[13])
+      this.playersTop.push(data[1], data[3], data[7], data[9], data[11], data[13], data[17], data[19])
       this.playersLeft =[];
-      this.playersLeft.push(data[2])
+      this.playersLeft.push(data[4], data[14])
       this.playersRight =[];
-      this.playersRight.push(data[3])
-      console.log(this.playersBottom)
+      this.playersRight.push(data[5], data[15])
     })
   }
   
   getPlayersFilter(players) {
     return players.filter(player => player);
+  }
+  showAnswers() {
+    this.revealCard = true
   }
 }
 

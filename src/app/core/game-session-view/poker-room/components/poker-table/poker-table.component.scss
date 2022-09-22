@@ -9,15 +9,20 @@
   justify-content: space-around;
   align-items: center;
 }
-
+.left{
+  margin-right: 40px;
+}
+.right{
+  margin-left: 40px;
+}
 .mid {
-  justify-content: space-between;
+  justify-content: space-around;
   .table {
     display: flex;
-    width: 80%;
+    flex: 1;
     border-radius: 20px;
     background-color: $secondary;
-    height: 100px;
+    height: 200px;
     margin: 10px 0;
     justify-content: center;
     align-items: center;
