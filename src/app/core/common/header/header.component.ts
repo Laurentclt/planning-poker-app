@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {}
 
-  toggleModal() {
+  toggleModal(): void {
     console.log('toogle')
     this.showModal = !this.showModal;
   }

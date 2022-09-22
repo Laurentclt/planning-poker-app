@@ -18,8 +18,4 @@ export class VoteCardComponent implements OnInit {
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {}
-
-  selectCard(cardValue: number) {
-    this.changeCardValue.emit(cardValue)
-  }
 }

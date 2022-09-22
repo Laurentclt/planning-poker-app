@@ -10,8 +10,8 @@ export class ModalInvitePlayersComponent implements OnInit {
   @Output()
   emitModal = new EventEmitter()
   
-  urlGameSession = window.location.href ;
-
+  urlGameSession:string = window.location.href ;
+  isTextCopied: boolean = false;
   showModal: boolean; 
 
   constructor() {}
@@ -19,14 +19,17 @@ export class ModalInvitePlayersComponent implements OnInit {
   ngOnInit(): void {
     this.showModal = true;
   }
-  closeModal(e: Event) {
+  closeModal(e: Event): void {
     e.stopPropagation()
     this.showModal = false;
     this.emitModal.emit()
-    
   }
-  cancelAction(e: Event) {
+  cancelAction(e: Event): void {
     e.stopPropagation()
+  }
+  copyUrl(): void {
+    navigator.clipboard.writeText(this.urlGameSession)
+    this.isTextCopied = true
   }
 
 }

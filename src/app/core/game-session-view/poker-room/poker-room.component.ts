@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DocumentChange } from '@angular/fire/firestore';
 import { Player } from 'src/app/models/player.model';
-import { map } from 'rxjs/operators';
 import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
@@ -18,11 +16,9 @@ export class PokerRoomComponent implements OnInit {
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-     // this.usersDbService.players
-    // .subscribe( data => console.log('data', data))
-    this.usersDbService.gameSessionsCollection.doc(this.usersDbService.currentGameSessionId).collection('players')
-    .valueChanges().subscribe(data => this.players = data)
-
+    this.usersDbService.players.subscribe(data => {
+      this.players = data
+    })
     // do I have to set currentUser in LocalStorage so this modal will not show even if the user refresh ?
     this.usersDbService.currentUser === undefined? this.closeModal = false : this.closeModal = true
   }
@@ -31,6 +27,4 @@ export class PokerRoomComponent implements OnInit {
     this.closeModal = true
     this.usersDbService.addUser(playerName)
   }
-  // changeCardValue(player: DocumentChange) {
-  // }
 }

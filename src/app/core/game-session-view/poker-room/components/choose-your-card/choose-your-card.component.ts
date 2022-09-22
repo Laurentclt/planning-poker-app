@@ -11,17 +11,19 @@ export class ChooseYourCardComponent implements OnInit {
   @Input()
   players: Array<Player>
   currentSelectedCard: number;
+  classical: Array<number> = [1, 2, 3, 5, 8, 13, 20, 30]
   cardValues: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {}
-  newCardValue(cardValue: number) {
-    this.currentSelectedCard = cardValue
-    this.updateCardValue()
-  }
-  updateCardValue() {
+  
+  updateCardValue(): void {
     let currentPlayer = this.usersDbService.currentUser
     this.usersDbService.updateUserCard(currentPlayer.id, this.currentSelectedCard)
+  }
+  selectCard(cardValue: number) {
+    this.currentSelectedCard = cardValue
+    this.updateCardValue()
   }
 }
