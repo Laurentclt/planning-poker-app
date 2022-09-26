@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() { }
 
   goToSettingsView() {
-    console.log('passe par la')
     this.router.navigateByUrl('new-game')
   }
 }

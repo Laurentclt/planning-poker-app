@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Player } from 'src/app/models/player.model';
+
 import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { UsersDbService } from 'src/services/users-db.service';
   styleUrls: ['./choose-your-card.component.scss'],
 })
 export class ChooseYourCardComponent implements OnInit {
-  currentSelectedCard: number;
+  @Input()
+  currentPlayer: Player;
   classical: Array<number> = [1, 2, 3, 5, 8, 13, 20, 30]
   cardValues: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   
@@ -16,18 +18,17 @@ export class ChooseYourCardComponent implements OnInit {
 
   ngOnInit() {}
   
-  updateCardValue(): void {
-    let currentPlayer: Player;
-    this.usersDbService.currentPlayer.subscribe(data => {
-      console.log('fonction 2')
-     currentPlayer = data
-    //  Attention boucle infinie
-    //  this.usersDbService.updateUserCard(currentPlayer.id, this.currentSelectedCard)
-    });
-    
-  }
+  unselectCard() {
+    console.log('unselect card to do when find how style choice card')
+    this.usersDbService.updateUserCard(this.currentPlayer.id, null)
+  };
   selectCard(cardValue: number) {
-    this.currentSelectedCard = cardValue
-    this.updateCardValue()
-  }
+    if (this.currentPlayer.cardValue !== cardValue) {
+      console.log("update card")
+      console.log(this.currentPlayer)
+      this.usersDbService.updateUserCard(this.currentPlayer.id, cardValue)
+    } else {
+      this.unselectCard()
+    }
+  };
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
 import { UsersDbService } from '../../../../../../services/users-db.service';
 import { Player } from '../../../../../models/player.model';
 
@@ -8,8 +8,14 @@ import { Player } from '../../../../../models/player.model';
   styleUrls: ['./poker-table.component.scss'],
 })
 export class PokerTableComponent implements OnInit {
-  // @Input()
-  // players: Array<Player>;
+  @Input()
+  currentPlayer: Player;
+  @Input()
+  gameIsOver: boolean;
+
+  @Output()
+  emitGameOver = new EventEmitter()
+
   playersTop: Array<Player> = [];
   playersBottom: Array<Player> = [];
   playersLeft: Array<Player> = [];
@@ -17,24 +23,28 @@ export class PokerTableComponent implements OnInit {
 
   message: string = 'pick your cards !';
   buttonRevealCard: boolean = false;
+  revealCards: boolean;
 
 
   constructor(private usersDbService: UsersDbService) { }
 
   ngOnInit() {
     this.cardsPlacement()
-    // this.isPlayerReady()
+  }
+  ngOnChanges() {
+    this.switchToButton()
   }
   
   getPlayersFilter(players) {
     return players.filter(player => player);
   }
   showAnswers() {
-
+    this.revealCards = true
+    console.log(this.revealCards)
+    this.goToResults()
   }
   cardsPlacement(): void {
     this.usersDbService.players.subscribe( data => {
-      console.log('fonction 1')
       this.playersBottom =[];
       this.playersBottom.push(data[0], data[2], data[6], data[8], data[10], data[12], data[16], data[18])
       this.playersTop =[];
@@ -45,13 +55,15 @@ export class PokerTableComponent implements OnInit {
       this.playersRight.push(data[5], data[15])
     })
   }
-//  isPlayerReady():void {
-//   let playerCard: number;
-//   this.usersDbService.currentPlayer.subscribe(data => 
-//   playerCard = data.cardValue)
-//   if (playerCard) {
-//     this.buttonRevealCard = true
-//   }
-  // }
+  switchToButton() {
+    this.usersDbService.currentPlayer$.subscribe(data => {
+      if (data.cardValue) {
+        this.buttonRevealCard = true
+      }
+    })
+  }
+  goToResults() {
+    this.emitGameOver.emit()
+  }
 }
 

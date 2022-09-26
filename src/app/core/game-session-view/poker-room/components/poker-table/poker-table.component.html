@@ -3,7 +3,7 @@
     <app-choice-user-card
       *ngFor="let player of getPlayersFilter(playersTop)"
       [player]="player"
-      [revealCard]="buttonRevealCard"
+      [revealCards]="revealCards"
     ></app-choice-user-card>
   </div>
   <div class="column mid">
@@ -11,18 +11,21 @@
       <app-choice-user-card
       *ngFor="let player of getPlayersFilter(playersLeft)"
       [player]="player"
-      
+      [revealCards]="revealCards"
     ></app-choice-user-card>
     </div>
     <div class="table" >
-      <app-button *ngIf="buttonRevealCard; else pickCard" message="Reveal answers" (click)="showAnswers()"></app-button>
-      <ng-template #pickCard> <div >{{ message }}</div></ng-template>
+      <app-button *ngIf="gameIsOver; else btnReveal" message="Start new game"></app-button>
+      <ng-template #btnReveal>
+      <app-button  *ngIf="buttonRevealCard; else pickCard" message="Reveal answers" (click)="showAnswers()"></app-button>
+      </ng-template>
+      <ng-template #pickCard > <div >{{ message }}</div></ng-template>
     </div>
     <div class="right">
       <app-choice-user-card
       *ngFor="let player of getPlayersFilter(playersRight)"
       [player]="player"
-     
+      [revealCards]="revealCards"
     ></app-choice-user-card>
     </div>
   </div>
@@ -30,7 +33,7 @@
     <app-choice-user-card
       *ngFor="let player of getPlayersFilter(playersBottom)"
       [player]="player"
-     
+      [revealCards]="revealCards"
     ></app-choice-user-card>
   </div>
 </div>

@@ -13,7 +13,7 @@ export class ChoiceUserCardComponent implements OnInit {
   @Input()
   player: Player;
   @Input()
-  revealCard: boolean;
+  revealCards: boolean;
 
   constructor(private usersDbService: UsersDbService) {}
 
@@ -23,7 +23,4 @@ export class ChoiceUserCardComponent implements OnInit {
   deleteUser(data: Player): void {
      this.usersDbService.deleteUser(data.id)
   }
-  // updateCard(data: Player) {
-  //   this.usersDbService.updateUser(data.id, data.cardValue + 1)
-  // }
 }

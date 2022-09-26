@@ -11,6 +11,7 @@ export class ModalSetupSettingsComponent implements OnInit {
   sessionName: string;
   message : string = 'Create session'
   gameUrl: string;
+  showModal: boolean = true;
   constructor(private usersDbService:UsersDbService, private router: Router) {
    
    }

@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { ModalAskNameComponent } from './core/common/modal-ask-name/modal-ask-name.component';
 import { ModalInvitePlayersComponent } from './core/common/modal-invite-players/modal-invite-players.component';
 import { ModalSetupSettingsComponent } from './core/common/modal-setup-settings/modal-setup-settings.component';
+import { ResultsComponent } from './core/game-session-view/poker-room/components/results/results.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule,
@@ -39,7 +40,8 @@ import { ModalSetupSettingsComponent } from './core/common/modal-setup-settings/
     HomeComponent,
     ModalAskNameComponent,
     ModalInvitePlayersComponent,
-    ModalSetupSettingsComponent
+    ModalSetupSettingsComponent,
+    ResultsComponent
   ],
   bootstrap: [AppComponent],
 })

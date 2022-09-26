@@ -16,7 +16,8 @@ export class UsersDbService {
   gameSessionsCollection: AngularFirestoreCollection<Session>;
   players: Observable<Player[]>;
   currentGameSession: Session;
-  currentPlayer: Observable<Player>
+  currentPlayer$: Observable<Player>;
+ 
 
   constructor(afs: AngularFirestore,  private router : Router ) {
     this.afs = afs
@@ -32,7 +33,7 @@ export class UsersDbService {
     .doc(id).collection<Player>('players').valueChanges()
   }
   setCurrentPlayer(id: string, userId: string) {
-    this.currentPlayer = this.gameSessionsCollection.doc(id)
+    this.currentPlayer$ = this.gameSessionsCollection.doc(id)
     .collection('players').doc(userId).valueChanges()
   }
   createGameSession(sessionName: string): string {
@@ -56,8 +57,8 @@ export class UsersDbService {
     this.setCurrentPlayer(this.currentGameSession.id, playerId)
   }
   
-  updateUserCard(id: string, value: number): void {
-    this.gameSessionsCollection.doc(this.currentGameSession.id).collection<Player>('players').doc(id).update({cardValue: value })
+  updateUserCard(playerId: string, value: number): void {
+    this.gameSessionsCollection.doc(this.currentGameSession.id).collection<Player>('players').doc(playerId).update({cardValue: value })
   }
 
   deleteUser(id: string): void {
