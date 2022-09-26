@@ -20,7 +20,7 @@ export class PokerRoomComponent implements OnInit {
     //   this.players = data
     // })
     // do I have to set currentUser in LocalStorage so this modal will not show even if the user refresh ?
-    this.usersDbService.currentUser === undefined? this.closeModal = false : this.closeModal = true
+    this.usersDbService.currentPlayer === undefined? this.closeModal = false : this.closeModal = true
   }
   getPlayerName(playerName : string): void {
     this.playerName = playerName

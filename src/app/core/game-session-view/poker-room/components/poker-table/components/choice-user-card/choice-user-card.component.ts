@@ -17,7 +17,8 @@ export class ChoiceUserCardComponent implements OnInit {
 
   constructor(private usersDbService: UsersDbService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   deleteUser(data: Player): void {
      this.usersDbService.deleteUser(data.id)

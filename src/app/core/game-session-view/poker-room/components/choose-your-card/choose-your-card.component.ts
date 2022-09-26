@@ -17,8 +17,14 @@ export class ChooseYourCardComponent implements OnInit {
   ngOnInit() {}
   
   updateCardValue(): void {
-    let currentPlayer = this.usersDbService.currentUser
-    this.usersDbService.updateUserCard(currentPlayer.id, this.currentSelectedCard)
+    let currentPlayer: Player;
+    this.usersDbService.currentPlayer.subscribe(data => {
+      console.log('fonction 2')
+     currentPlayer = data
+    //  Attention boucle infinie
+    //  this.usersDbService.updateUserCard(currentPlayer.id, this.currentSelectedCard)
+    });
+    
   }
   selectCard(cardValue: number) {
     this.currentSelectedCard = cardValue

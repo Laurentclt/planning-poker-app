@@ -1,1 +1,3 @@
-<p>modal-setup-settings works!</p>
+<h3>Create new game session</h3>
+<input type="text" placeholder="session name" [(ngModel)]="sessionName">
+<app-button  [message]="message" (click)="createGameSession(sessionName)"></app-button>

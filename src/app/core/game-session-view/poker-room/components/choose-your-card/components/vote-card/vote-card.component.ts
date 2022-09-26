@@ -13,7 +13,7 @@ export class VoteCardComponent implements OnInit {
   @Output()
   changeCardValue = new EventEmitter<number>()
 
-  isSelected: boolean;
+
 
   constructor() {}
 
