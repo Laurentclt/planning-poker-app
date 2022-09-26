@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
   selector: 'app-modal-setup-settings',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-setup-settings.component.scss']
 })
 export class ModalSetupSettingsComponent implements OnInit {
+  sessionName: string;
+  message : string = 'Create session'
+  gameUrl: string;
+  constructor(private usersDbService:UsersDbService, private router: Router) {
+   
+   }
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  createGameSession(sessionName: string ): void {
+    // change function parameters
+    this.gameUrl = this.usersDbService.createGameSession(sessionName)
+    this.router.navigateByUrl(this.gameUrl)
   }
-
 }

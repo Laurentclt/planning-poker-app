@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersDbService } from 'src/services/users-db.service';
+
 
 
 @Component({
@@ -10,14 +10,14 @@ import { UsersDbService } from 'src/services/users-db.service';
 })
 export class HomeComponent implements OnInit {
   message: string = 'Start new game';
-  gameUrl: string;
+ 
 
-  constructor(private usersDbService: UsersDbService, private router: Router) {}
+  constructor(private router: Router) {}
 
   ngOnInit() { }
 
-  createGameSession(): void {
-    this.gameUrl = this.usersDbService.createGameSession()
-    this.router.navigateByUrl(this.gameUrl)
+  goToSettingsView() {
+    console.log('passe par la')
+    this.router.navigateByUrl('new-game')
   }
 }

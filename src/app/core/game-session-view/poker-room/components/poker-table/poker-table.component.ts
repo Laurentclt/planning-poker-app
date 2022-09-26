@@ -34,6 +34,7 @@ export class PokerTableComponent implements OnInit {
   }
   cardsPlacement(): void {
     this.usersDbService.players.subscribe( data => {
+      console.log('fonction 1')
       this.playersBottom =[];
       this.playersBottom.push(data[0], data[2], data[6], data[8], data[10], data[12], data[16], data[18])
       this.playersTop =[];
