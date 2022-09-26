@@ -4,6 +4,7 @@ import { Player } from '../app/models/player.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Session } from 'src/app/models/session.model';
 import { Router } from '@angular/router';
+import { VoteSystem } from 'src/app/models/voteSystem.model';
 
 
 
@@ -36,11 +37,11 @@ export class UsersDbService {
     this.currentPlayer$ = this.gameSessionsCollection.doc(id)
     .collection('players').doc(userId).valueChanges()
   }
-  createGameSession(sessionName: string): string {
+  createGameSession(sessionName: string, system: VoteSystem): string {
     const id = this.afs.createId();
-    const gameSession: Session = {id, name: sessionName}
+    const gameSession: Session = {id, name: sessionName, voteSystem: system}
     this.gameSessionsCollection.doc(id).set(gameSession)
-    this.currentGameSession = {id: id, name: sessionName}
+    this.currentGameSession = gameSession
     this.setPlayersObservable(id)
     console.log(sessionName)
     console.log(id)

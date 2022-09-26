@@ -15,7 +15,7 @@
     ></app-choice-user-card>
     </div>
     <div class="table" >
-      <app-button *ngIf="gameIsOver; else btnReveal" message="Start new game"></app-button>
+      <app-button *ngIf="gameIsOver; else btnReveal" message="Start new game" (click)="resetAll()"></app-button>
       <ng-template #btnReveal>
       <app-button  *ngIf="buttonRevealCard; else pickCard" message="Reveal answers" (click)="showAnswers()"></app-button>
       </ng-template>

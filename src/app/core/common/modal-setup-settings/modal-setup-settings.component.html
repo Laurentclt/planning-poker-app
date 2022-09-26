@@ -3,7 +3,10 @@
         <h3>Create new game session</h3>
         <div class="form">
             <input type="text" placeholder="session name" [(ngModel)]="sessionName">
-            <input type="text" placeholder="choose system vote">
+            <input type="text" (click)="suggest()" [(ngModel)]="systemVote">
+            <div class="autocomplete-systems" *ngIf="showSuggestions">
+                <div *ngFor="let system of suggestions" class="suggestions" (click)="selectSuggestion(system)">{{ system.name }}: ({{system.values}})</div>
+              </div>
         </div>
         <app-button  [message]="message" (click)="createGameSession(sessionName)"></app-button>
     </div>

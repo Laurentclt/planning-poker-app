@@ -56,14 +56,19 @@ export class PokerTableComponent implements OnInit {
     })
   }
   switchToButton() {
+    if (this.usersDbService.currentPlayer$ !== undefined) {
     this.usersDbService.currentPlayer$.subscribe(data => {
       if (data.cardValue) {
         this.buttonRevealCard = true
       }
     })
   }
+  }
   goToResults() {
     this.emitGameOver.emit()
+  }
+  resetAll() {
+    
   }
 }
 

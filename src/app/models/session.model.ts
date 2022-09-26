@@ -1,5 +1,7 @@
+import { VoteSystem } from "./voteSystem.model";
+
 export interface Session {
     id: string;
-    voteSystem?: string;
+    voteSystem?: VoteSystem;
     name?: string;
   }

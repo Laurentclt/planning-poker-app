@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { VoteSystem } from 'src/app/models/voteSystem.model';
 import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
@@ -12,7 +13,14 @@ export class ModalSetupSettingsComponent implements OnInit {
   message : string = 'Create session'
   gameUrl: string;
   showModal: boolean = true;
-  constructor(private usersDbService:UsersDbService, private router: Router) {
+
+  showSuggestions: boolean = false;
+  systemVote = '';
+  systemSelected: VoteSystem;
+  suggestions = [{id:"classic",name: "classic", values: [1, 2, 3, 5, 8, 13, 20, 30]},
+   {id:"oneTen", name: 'one to ten scale', values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}];
+  
+   constructor(private usersDbService:UsersDbService, private router: Router) {
    
    }
 
@@ -20,7 +28,19 @@ export class ModalSetupSettingsComponent implements OnInit {
 
   createGameSession(sessionName: string ): void {
     // change function parameters
-    this.gameUrl = this.usersDbService.createGameSession(sessionName)
-    this.router.navigateByUrl(this.gameUrl)
+    this.gameUrl = this.usersDbService.createGameSession(sessionName, this.systemSelected);
+    this.router.navigateByUrl(this.gameUrl);
+  }
+
+
+  suggest() {
+    this.showSuggestions = true;
+  }
+
+  selectSuggestion(system: VoteSystem) {
+    this.systemVote = `${system.name} : (${system.values})`;
+    this.showSuggestions = false;
+    this.systemSelected = system;
   }
 }
+

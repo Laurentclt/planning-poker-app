@@ -11,12 +11,14 @@ import { UsersDbService } from 'src/services/users-db.service';
 export class ChooseYourCardComponent implements OnInit {
   @Input()
   currentPlayer: Player;
-  classical: Array<number> = [1, 2, 3, 5, 8, 13, 20, 30]
-  cardValues: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  // classical: Array<number> = [1, 2, 3, 5, 8, 13, 20, 30]
+  cardValues: Array<number>;
   
   constructor( private usersDbService: UsersDbService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cardValues = this.usersDbService.currentGameSession.voteSystem.values
+  }
   
   unselectCard() {
     console.log('unselect card to do when find how style choice card')
