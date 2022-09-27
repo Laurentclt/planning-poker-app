@@ -1,4 +1,4 @@
-<div class="card" (dblclick)="deleteUser(this.player)">
+<div class="card" (dblclick)="deleteUser(this.player)" [ngClass]="{'isSelected' : player.cardValue !== null && !revealCards, 'isDisplayed': player.cardValue !== null && revealCards}">
   <div class="value" *ngIf="revealCards">
     {{ player.cardValue }}
   </div>

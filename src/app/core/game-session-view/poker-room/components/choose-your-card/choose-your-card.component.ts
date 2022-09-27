@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Player } from 'src/app/models/player.model';
-
+import { VoteCard } from 'src/app/models/voteCard.model';
 import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
@@ -11,26 +11,30 @@ import { UsersDbService } from 'src/services/users-db.service';
 export class ChooseYourCardComponent implements OnInit {
   @Input()
   currentPlayer: Player;
-  // classical: Array<number> = [1, 2, 3, 5, 8, 13, 20, 30]
-  cardValues: Array<number>;
+  cardValues: Array<VoteCard> = [];
   
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-    this.cardValues = this.usersDbService.currentGameSession.voteSystem.values
+    for (let data of this.usersDbService.currentGameSession.voteSystem.values){
+      this.cardValues.push({cardValue: data})
+    }
+    console.log(this.cardValues)
   }
   
-  unselectCard() {
-    console.log('unselect card to do when find how style choice card')
+  unselectCard(card: VoteCard) {
+    console.log('unselect card')
     this.usersDbService.updateUserCard(this.currentPlayer.id, null)
+    card.selected = false
   };
-  selectCard(cardValue: number) {
-    if (this.currentPlayer.cardValue !== cardValue) {
+  selectCard(card: VoteCard) {
+    if (this.currentPlayer.cardValue !== card.cardValue) {
+      this.cardValues.forEach(card => card.selected = false)
       console.log("update card")
-      console.log(this.currentPlayer)
-      this.usersDbService.updateUserCard(this.currentPlayer.id, cardValue)
+      card.selected = true
+      this.usersDbService.updateUserCard(this.currentPlayer.id, card.cardValue)
     } else {
-      this.unselectCard()
+      this.unselectCard(card)
     }
   };
 }

@@ -9,6 +9,7 @@
 }
 .card {
   background-color: $notSelected;
+  opacity: 0.6;
   height: 60px;
   width: 30px;
   display: flex;
@@ -28,4 +29,15 @@
   text-overflow: ellipsis;
   margin: 5px 0;
   text-align: center;
+}
+.isSelected {
+  opacity: 1;
+}
+.isDisplayed {
+  background-color: $white;
+  opacity: 1;
+  .value {
+    color: $primary;
+    font-size: 20px;
+  }
 }

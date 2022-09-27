@@ -15,10 +15,10 @@ export class ModalSetupSettingsComponent implements OnInit {
   showModal: boolean = true;
 
   showSuggestions: boolean = false;
-  systemVote = '';
-  systemSelected: VoteSystem;
   suggestions = [{id:"classic",name: "classic", values: [1, 2, 3, 5, 8, 13, 20, 30]},
    {id:"oneTen", name: 'one to ten scale', values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}];
+  systemSelected: VoteSystem = this.suggestions[0];
+  systemVote: string = `${this.suggestions[0].name}: (${this.suggestions[0].values})`;
   
    constructor(private usersDbService:UsersDbService, private router: Router) {
    

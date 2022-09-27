@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { VoteCard } from 'src/app/models/voteCard.model';
 
 
 @Component({
@@ -8,12 +9,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class VoteCardComponent implements OnInit {
   @Input()
-  card: number;
+  card: VoteCard;
 
   @Output()
   changeCardValue = new EventEmitter<number>()
-
-
+  
+  // selected: boolean = false;
 
   constructor() {}
 

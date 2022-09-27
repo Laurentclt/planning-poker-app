@@ -58,8 +58,10 @@ export class PokerTableComponent implements OnInit {
   switchToButton() {
     if (this.usersDbService.currentPlayer$ !== undefined) {
     this.usersDbService.currentPlayer$.subscribe(data => {
-      if (data.cardValue) {
+      if (data.cardValue !== null ) {
         this.buttonRevealCard = true
+      } else {
+        this.buttonRevealCard = false
       }
     })
   }

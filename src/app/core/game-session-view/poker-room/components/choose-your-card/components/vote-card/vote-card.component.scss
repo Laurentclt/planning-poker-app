@@ -16,11 +16,15 @@
     text-align: center;
   }
 }
+.card.selected:hover {
+  color: $primary;
+}
 .card:hover {
   scale: 1.1;
   background-color: $white;
+  color: $primary;
 }
-.card:focus {
+.selected {
   background-color: $primary;
   translate: 0 -10px;
   .value {
