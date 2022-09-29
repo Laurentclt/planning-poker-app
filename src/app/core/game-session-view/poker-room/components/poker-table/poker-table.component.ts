@@ -70,7 +70,7 @@ export class PokerTableComponent implements OnInit {
     this.emitGameOver.emit()
   }
   resetAll() {
-    
+    this.usersDbService.resetAllPlayers()
   }
 }
 

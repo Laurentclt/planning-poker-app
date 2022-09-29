@@ -73,5 +73,7 @@ export class UsersDbService {
       }
     } )
   }
-
+  resetAllPlayers() {
+    this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').get()
+  }
 }
