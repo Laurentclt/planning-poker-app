@@ -2,7 +2,7 @@
 <app-modal-ask-name class="modal" (sendPlayerName)="getPlayerName($event)" *ngIf="!closeModal"></app-modal-ask-name>
 <div class="container">
   <div class="poker-table">
-  <app-poker-table [currentPlayer]="currentPlayer" [gameIsOver]="gameIsOver" (emitGameOver)="showResults()"></app-poker-table>
+  <app-poker-table [currentPlayer]="currentPlayer" [gameIsOver]="gameIsOver" (startNewGame)="resetView()" (emitGameOver)="showResults()"></app-poker-table>
   </div>
   <app-choose-your-card *ngIf="!gameIsOver; else results" class="pick-card" [currentPlayer]="currentPlayer" > </app-choose-your-card>
   <ng-template #results><app-results ></app-results></ng-template>

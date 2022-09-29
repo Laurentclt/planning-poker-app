@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { UsersDbService } from 'src/services/users-db.service';
 
 
@@ -7,12 +7,12 @@ import { UsersDbService } from 'src/services/users-db.service';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements AfterViewChecked {
   noteAverage: Number;
   preciseNote: Number;   
   constructor( private usersDbService: UsersDbService) { }
 
-  ngOnInit(): void {
+  ngAfterViewChecked(): void {
     this.calculAverageNote()
     this.calculPreciseNote()
     
@@ -26,7 +26,8 @@ export class ResultsComponent implements OnInit {
       sum += player.cardValue
       });
       this.noteAverage = sum / players.length
-    })
+      console.log(this.noteAverage)
+    }).unsubscribe()
   }
   calculPreciseNote() : void{
     let sum: number = 0;
@@ -47,6 +48,6 @@ export class ResultsComponent implements OnInit {
       } else {
       this.preciseNote = this.noteAverage
       }
-    })
+    }).unsubscribe()
   }
 }

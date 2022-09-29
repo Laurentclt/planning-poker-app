@@ -9,7 +9,7 @@ import { UsersDbService } from 'src/services/users-db.service';
   styleUrls: ['./modal-setup-settings.component.scss']
 })
 export class ModalSetupSettingsComponent implements OnInit {
-  sessionName: string;
+  sessionName: string = "";
   message : string = 'Create session'
   gameUrl: string;
   showModal: boolean = true;
@@ -27,9 +27,14 @@ export class ModalSetupSettingsComponent implements OnInit {
   ngOnInit(): void {}
 
   createGameSession(sessionName: string ): void {
-    // change function parameters
-    this.gameUrl = this.usersDbService.createGameSession(sessionName, this.systemSelected);
+    if (sessionName !== '') {
+      this.gameUrl = this.usersDbService.createGameSession(sessionName, this.systemSelected);
     this.router.navigateByUrl(this.gameUrl);
+    } else {
+      alert('veuillez remplir tous les champs')
+    }
+    // change function parameters
+    
   }
 
 

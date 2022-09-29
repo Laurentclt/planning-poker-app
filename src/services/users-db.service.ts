@@ -16,7 +16,7 @@ export class UsersDbService {
   afs: AngularFirestore;
   gameSessionsCollection: AngularFirestoreCollection<Session>;
   players: Observable<Player[]>;
-  currentGameSession: Session;
+  currentGameSession: Session = {};
   currentPlayer$: Observable<Player>;
  
 
@@ -47,6 +47,9 @@ export class UsersDbService {
     console.log(id)
     return id
   }
+  resetGameSession() {
+    this.resetPlayerCard()
+  }
   addUser(playerName: string): void {
     // to do : first player created in the collection is admin
     console.log('adduser called', playerName)
@@ -73,7 +76,17 @@ export class UsersDbService {
       }
     } )
   }
-  resetAllPlayers() {
-    this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').get()
+  // resetAllPlayers() {
+  //   this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').get()
+  //   }
+  resetPlayerCard() {
+    let id: string;
+    this.currentPlayer$.subscribe(player => {
+      id = player.id
+      if (player.cardValue !== null) {
+      console.log('reset user card')
+      this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').doc(id).update({cardValue: null})
+      }
+    }).unsubscribe()
   }
 }

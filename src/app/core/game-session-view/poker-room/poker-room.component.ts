@@ -35,4 +35,7 @@ export class PokerRoomComponent implements OnInit {
   showResults() {
     this.gameIsOver = true;
   }
+  resetView() {
+    this.gameIsOver = false
+  }
 }
