@@ -73,6 +73,7 @@ export class PokerTableComponent implements OnInit {
     this.emitGameOver.emit()
   }
   resetAll(): void {
+    this.revealCards = false
     this.startNewGame.emit();
     this.usersDbService.resetPlayerCard();
   }
