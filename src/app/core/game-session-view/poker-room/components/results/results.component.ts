@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersDbService } from 'src/services/users-db.service';
 
 
@@ -8,8 +8,8 @@ import { UsersDbService } from 'src/services/users-db.service';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-  noteAverage: Number;
-  preciseNote: Number; 
+  noteAverage: number;
+  preciseNote: number; 
  
   constructor( private usersDbService: UsersDbService) { }
 
@@ -21,12 +21,16 @@ export class ResultsComponent implements OnInit {
 
   calculAverageNote() : void {
     let sum: number = 0;
+    let allNotes: Array<number> = [];
     let subscription = this.usersDbService.players$.subscribe(players => {
       players.forEach(player => {
-        console.log(player)
-      sum += player.cardValue
+        let note = player.cardValue
+        if (note !== null) {
+          allNotes.push(note)
+          sum += note
+      }
       });
-      this.noteAverage = sum / players.length
+      this.noteAverage = sum / allNotes.length
       console.log('moyenne : ', this.noteAverage)
       subscription.unsubscribe()
     })
@@ -37,16 +41,18 @@ export class ResultsComponent implements OnInit {
     let allNotes: Array<number> = [];
     let subscription = this.usersDbService.players$.subscribe(players => {
       players.forEach(player => {
+        if (player.cardValue !== null) {
         allNotes.push(player.cardValue)
-      })
-      if (allNotes.length >= 3) {
-      allNotes.sort(function(a, b){return a - b})
-      allNotes.shift()
-      allNotes.pop()
-      allNotes.forEach(note => {
-      result = sum += note
-      })
-      this.preciseNote = result
+        }
+        })
+        if (allNotes.length >= 3) {
+        allNotes.sort(function(a, b){return a - b})
+        allNotes.shift()
+        allNotes.pop()
+        allNotes.forEach(note => {
+        result = sum += note
+        })
+      this.preciseNote = result / allNotes.length
       } else {
       this.preciseNote = this.noteAverage
       }

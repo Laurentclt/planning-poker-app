@@ -1,4 +1,4 @@
 <div class="container">
-    <div>moyenne des notes : {{ noteAverage }}</div>
-    <div>moyenne ajustée des notes : {{ preciseNote }}</div>
+    <div>moyenne des notes : {{ noteAverage  | number }}</div>
+    <div>moyenne ajustée des notes : {{ preciseNote | number:'1.0-2' }}</div>
 </div>
