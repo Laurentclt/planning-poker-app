@@ -4,6 +4,8 @@
   <div class="poker-table">
   <app-poker-table [currentPlayer]="currentPlayer" [gameIsOver]="gameIsOver" (startNewGame)="resetView()" (emitGameOver)="showResults()"></app-poker-table>
   </div>
+  <div *ngIf="isComponentReady">
   <app-choose-your-card *ngIf="!gameIsOver; else results" class="pick-card" [currentPlayer]="currentPlayer" > </app-choose-your-card>
+  </div>
   <ng-template #results><app-results ></app-results></ng-template>
 </div>

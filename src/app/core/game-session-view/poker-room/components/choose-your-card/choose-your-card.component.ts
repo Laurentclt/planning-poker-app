@@ -15,11 +15,11 @@ export class ChooseYourCardComponent implements OnInit {
   
   constructor( private usersDbService: UsersDbService) {}
 
-  ngOnInit() {
-    for (let data of this.usersDbService.currentGameSession.voteSystem.values){
-      this.cardValues.push({cardValue: data})
+  ngOnInit(): void {
+    for (let cardValue of this.usersDbService.currentGameSession.voteSystem.values) {
+      this.cardValues.push({cardValue}) 
     }
-    console.log(this.cardValues)
+    
   }
   
   unselectCard(card: VoteCard) {

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Player } from 'src/app/models/player.model';
+
 import { UsersDbService } from 'src/services/users-db.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class PokerRoomComponent implements OnInit {
   playerName: string;
   closeModal: boolean;
   gameIsOver: boolean;
+  isComponentReady: boolean = false;
+  
 
   constructor( private usersDbService: UsersDbService) {}
 
@@ -27,6 +30,7 @@ export class PokerRoomComponent implements OnInit {
     this.closeModal = true
     this.usersDbService.addUser(playerName)
     this.setCurrentPlayer()
+    this.isComponentReady = true;
   }
 
   setCurrentPlayer() {

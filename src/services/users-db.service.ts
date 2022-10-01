@@ -16,27 +16,34 @@ export class UsersDbService {
   afs: AngularFirestore;
   gameSessionsCollection: AngularFirestoreCollection<Session>;
   players$: Observable<Player[]>;
-  currentGameSession: Session = {};
+  currentGameSession: Session;
+
+
   currentPlayer$: Observable<Player>;
  
 
   constructor(afs: AngularFirestore,  private router : Router ) {
     this.afs = afs
     this.gameSessionsCollection = afs.collection<Session>('game-sessions')
+  
+    this.setGameSession() 
+  }
+  setGameSession() {
     if (this.router.url !== '/' && this.router.url !== '/new-game') {
       const id = this.router.url
       this.gameSessionsCollection.doc(id).valueChanges().subscribe(data => {
-        console.log(data)
-        this.currentGameSession = data})
+        console.log("game session:", data)
+        this.currentGameSession = data
+      })
       this.setPlayersObservable(id)
       
     }
   }
-  setPlayersObservable(id: string) {
+  setPlayersObservable(id: string): void{
     this.players$ = this.afs.collection<Session>('game-sessions')
     .doc(id).collection<Player>('players').valueChanges()
   }
-  setCurrentPlayer(id: string, userId: string) {
+  setCurrentPlayer(id: string, userId: string): void {
     this.currentPlayer$ = this.gameSessionsCollection.doc(id)
     .collection('players').doc(userId).valueChanges()
   }
@@ -50,7 +57,7 @@ export class UsersDbService {
     console.log(id)
     return id
   }
-  resetGameSession() {
+  resetGameSession(): void {
     this.resetPlayerCard()
   }
   addUser(playerName: string): void {
@@ -82,7 +89,7 @@ export class UsersDbService {
   // resetAllPlayers() {
   //   this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').get()
   //   }
-  resetPlayerCard() {
+  resetPlayerCard(): void {
     let id: string;
     let subscription = this.currentPlayer$.subscribe(player => {
       id = player.id
