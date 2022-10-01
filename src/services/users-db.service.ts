@@ -15,7 +15,7 @@ export class UsersDbService {
   // playersCollection: AngularFirestoreCollection<Player>;
   afs: AngularFirestore;
   gameSessionsCollection: AngularFirestoreCollection<Session>;
-  players: Observable<Player[]>;
+  players$: Observable<Player[]>;
   currentGameSession: Session = {};
   currentPlayer$: Observable<Player>;
  
@@ -25,12 +25,15 @@ export class UsersDbService {
     this.gameSessionsCollection = afs.collection<Session>('game-sessions')
     if (this.router.url !== '/' && this.router.url !== '/new-game') {
       const id = this.router.url
-      this.currentGameSession.id = id
+      this.gameSessionsCollection.doc(id).valueChanges().subscribe(data => {
+        console.log(data)
+        this.currentGameSession = data})
       this.setPlayersObservable(id)
+      
     }
   }
   setPlayersObservable(id: string) {
-    this.players = this.afs.collection<Session>('game-sessions')
+    this.players$ = this.afs.collection<Session>('game-sessions')
     .doc(id).collection<Player>('players').valueChanges()
   }
   setCurrentPlayer(id: string, userId: string) {
@@ -68,7 +71,7 @@ export class UsersDbService {
   deleteUser(id: string): void {
     this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').doc(id).delete()
     let playersPlaying: number;
-    this.players.subscribe(data => {
+    this.players$.subscribe(data => {
       playersPlaying = data.length
       if (playersPlaying === 0) {
         console.log("suppression de la collection")
@@ -81,12 +84,13 @@ export class UsersDbService {
   //   }
   resetPlayerCard() {
     let id: string;
-    this.currentPlayer$.subscribe(player => {
+    let subscription = this.currentPlayer$.subscribe(player => {
       id = player.id
       if (player.cardValue !== null) {
       console.log('reset user card')
       this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').doc(id).update({cardValue: null})
       }
-    }).unsubscribe()
+      subscription.unsubscribe()
+    })
   }
 }
