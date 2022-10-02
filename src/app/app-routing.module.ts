@@ -5,7 +5,7 @@ import { PokerRoomComponent } from './core/game-session-view/poker-room/poker-ro
 import { HomeComponent } from './core/home-view/home/home.component';
 
 const routes: Routes = [
-  { path: 'planning-poker-app', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'new-game', component: ModalSetupSettingsComponent },
   { path: ':id', component: PokerRoomComponent },
 ];
