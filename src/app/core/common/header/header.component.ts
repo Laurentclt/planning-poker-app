@@ -18,6 +18,10 @@ export class HeaderComponent implements OnInit {
     console.log('toogle')
     this.showModal = !this.showModal;
   }
-
+  goToHome() {
+    if (confirm("voulez vous retournez à la page d'accueil ? Cela quittera votre partie en cours")) {
+      this.router.navigateByUrl('')
+    }
+  }
  
 }

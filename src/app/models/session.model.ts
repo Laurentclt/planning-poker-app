@@ -5,4 +5,5 @@ export interface Session {
     voteSystem?: VoteSystem;
     name?: string;
     reset?: boolean;
+    showCards?: boolean;
   }

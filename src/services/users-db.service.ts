@@ -16,6 +16,7 @@ export class UsersDbService {
   gameSessionsCollection: AngularFirestoreCollection<Session>;
   players$: Observable<Player[]>;
   currentGameSession: Session;
+  currentGameSession$: Observable<Session>;
   currentPlayer$: Observable<Player>;
  
 
@@ -29,7 +30,8 @@ export class UsersDbService {
   setGameSession() {
     if (this.router.url !== '/' && this.router.url !== '/new-game') {
       const id = this.router.url
-      this.gameSessionsCollection.doc(id).valueChanges().subscribe(data => {
+      this.currentGameSession$ = this.gameSessionsCollection.doc(id).valueChanges()
+      this.currentGameSession$.subscribe(data => {
         console.log("game session:", data)
         this.currentGameSession = data
       })
@@ -55,9 +57,10 @@ export class UsersDbService {
   }
   createGameSession(sessionName: string, system: VoteSystem): string {
     const id = this.afs.createId();
-    const gameSession: Session = {id, name: sessionName, voteSystem: system, reset: false}
+    const gameSession: Session = {id, name: sessionName, voteSystem: system, reset: false, showCards: false}
     this.gameSessionsCollection.doc(id).set(gameSession)
     this.currentGameSession = gameSession
+    this.currentGameSession$ = this.gameSessionsCollection.doc(id).valueChanges()
     this.setPlayersObservable(id)
     this.watchReset(id)
     return id
@@ -91,8 +94,12 @@ export class UsersDbService {
       }
     } )
   }
+  showPlayersCard() {
+    console.log('passe ici')
+    this.gameSessionsCollection.doc(this.currentGameSession.id).update({showCards: true})
+  }
   resetAllPlayers() {
-    this.gameSessionsCollection.doc(this.currentGameSession.id).update({reset: true})
+    this.gameSessionsCollection.doc(this.currentGameSession.id).update({reset: true, showCards: false})
     }
   resetPlayerCard(): void {
     let id: string;

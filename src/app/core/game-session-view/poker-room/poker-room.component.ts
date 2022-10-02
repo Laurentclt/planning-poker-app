@@ -19,11 +19,20 @@ export class PokerRoomComponent implements OnInit {
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-    if (this.usersDbService.currentPlayer$ === undefined) {
-      this.closeModal = false
-    } else {
-      this.closeModal = true
-    }
+      if (this.usersDbService.currentPlayer$ === undefined) {
+        this.closeModal = false
+      } else {
+        this.closeModal = true
+      }
+    // this.usersDbService.currentPlayer$.subscribe(data => {
+    //   if (data.id !== undefined) {
+    //     this.closeModal = false
+    //   } else {
+    //     this.closeModal = true
+    //   }
+    // })  
+    this.showResults()
+    this.resetView()
   }
   getPlayerName(playerName : string): void {
     this.playerName = playerName
@@ -37,9 +46,17 @@ export class PokerRoomComponent implements OnInit {
     this.usersDbService.currentPlayer$.subscribe(data => this.currentPlayer = data)
   }
   showResults() {
-    this.gameIsOver = true;
+   this.usersDbService.currentGameSession$.subscribe(data => {
+    if (data.showCards === true) {
+      this.gameIsOver = true
+    }
+   })
   }
   resetView() {
-    this.gameIsOver = false
+    this.usersDbService.currentGameSession$.subscribe(data => {
+      if (data.showCards === false) {
+        this.gameIsOver = false
+      }
+     })
   }
 }

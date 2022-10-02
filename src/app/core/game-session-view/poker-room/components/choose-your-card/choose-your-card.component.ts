@@ -17,9 +17,8 @@ export class ChooseYourCardComponent implements OnInit {
 
   ngOnInit(): void {
     for (let cardValue of this.usersDbService.currentGameSession.voteSystem.values) {
-      this.cardValues.push({cardValue}) 
+      this.cardValues.push({cardValue})
     }
-    
   }
   
   unselectCard(card: VoteCard) {

@@ -13,11 +13,11 @@ export class PokerTableComponent implements OnInit {
   @Input()
   gameIsOver: boolean;
 
-  @Output()
-  emitGameOver = new EventEmitter();
+  // @Output()
+  // emitGameOver = new EventEmitter();
 
-  @Output()
-  startNewGame = new EventEmitter();
+  // @Output()
+  // startNewGame = new EventEmitter();
 
   playersTop: Array<Player> = [];
   playersBottom: Array<Player> = [];
@@ -33,6 +33,13 @@ export class PokerTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.cardsPlacement()
+    this.usersDbService.currentGameSession$.subscribe(data => {
+      if (data.showCards === true) {
+        this.revealCards = true
+      } else if (data.showCards === false) {
+        this.revealCards = false
+      }
+    })
   }
   ngOnChanges(): void {
     this.switchToButton()
@@ -42,9 +49,7 @@ export class PokerTableComponent implements OnInit {
     return players.filter(player => player);
   }
   showAnswers(): void {
-    this.revealCards = true
-    console.log(this.revealCards)
-    this.goToResults()
+    this.usersDbService.showPlayersCard()
   }
   cardsPlacement(): void {
     this.usersDbService.players$.subscribe( data => {
@@ -69,12 +74,8 @@ export class PokerTableComponent implements OnInit {
     })
   }
   }
-  goToResults(): void {
-    this.emitGameOver.emit()
-  }
   resetAll(): void {
     this.revealCards = false
-    this.startNewGame.emit();
     this.usersDbService.resetAllPlayers();
   }
 }
