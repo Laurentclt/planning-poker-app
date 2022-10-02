@@ -12,7 +12,6 @@ import { VoteSystem } from 'src/app/models/voteSystem.model';
   providedIn: 'root',
 })
 export class UsersDbService {
-  // playersCollection: AngularFirestoreCollection<Player>;
   afs: AngularFirestore;
   gameSessionsCollection: AngularFirestoreCollection<Session>;
   players$: Observable<Player[]>;
@@ -60,8 +59,7 @@ export class UsersDbService {
     this.gameSessionsCollection.doc(id).set(gameSession)
     this.currentGameSession = gameSession
     this.setPlayersObservable(id)
-    console.log(sessionName)
-    console.log(id)
+    this.watchReset(id)
     return id
   }
   resetGameSession(): void {
@@ -99,10 +97,8 @@ export class UsersDbService {
   resetPlayerCard(): void {
     let id: string;
     let subscription = this.currentPlayer$.subscribe(player => {
-      console.log('try to reset')
       id = player.id
       if (player.cardValue !== null) {
-      console.log('reset user card')
       this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').doc(id).update({cardValue: null})
       }
       subscription.unsubscribe()

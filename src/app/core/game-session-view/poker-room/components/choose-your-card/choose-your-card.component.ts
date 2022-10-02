@@ -28,7 +28,7 @@ export class ChooseYourCardComponent implements OnInit {
     card.selected = false
   };
   selectCard(card: VoteCard) {
-    this.usersDbService.currentPlayer$.subscribe(player => {
+    let subscription = this.usersDbService.currentPlayer$.subscribe(player => {
       if (player.cardValue !== card.cardValue) {
         this.cardValues.forEach(card => card.selected = false)
         console.log("update card")
@@ -37,6 +37,7 @@ export class ChooseYourCardComponent implements OnInit {
       } else {
         this.unselectCard(card)
       }
+      subscription.unsubscribe()
     })
     
   };
