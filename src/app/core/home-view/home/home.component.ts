@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
    }
 
   goToSettingsView() {
-   
-    this.router.navigateByUrl('new-game')
+  this.router.navigateByUrl('new-game')
   }
 }
