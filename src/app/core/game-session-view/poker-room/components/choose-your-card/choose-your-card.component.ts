@@ -28,13 +28,16 @@ export class ChooseYourCardComponent implements OnInit {
     card.selected = false
   };
   selectCard(card: VoteCard) {
-    if (this.currentPlayer.cardValue !== card.cardValue) {
-      this.cardValues.forEach(card => card.selected = false)
-      console.log("update card")
-      card.selected = true
-      this.usersDbService.updateUserCard(this.currentPlayer.id, card.cardValue)
-    } else {
-      this.unselectCard(card)
-    }
+    this.usersDbService.currentPlayer$.subscribe(player => {
+      if (player.cardValue !== card.cardValue) {
+        this.cardValues.forEach(card => card.selected = false)
+        console.log("update card")
+        card.selected = true
+        this.usersDbService.updateUserCard(this.currentPlayer.id, card.cardValue)
+      } else {
+        this.unselectCard(card)
+      }
+    })
+    
   };
 }

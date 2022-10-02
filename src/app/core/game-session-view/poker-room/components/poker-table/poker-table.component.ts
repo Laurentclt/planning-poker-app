@@ -75,7 +75,7 @@ export class PokerTableComponent implements OnInit {
   resetAll(): void {
     this.revealCards = false
     this.startNewGame.emit();
-    this.usersDbService.resetPlayerCard();
+    this.usersDbService.resetAllPlayers();
   }
 }
 

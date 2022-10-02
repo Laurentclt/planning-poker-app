@@ -4,4 +4,5 @@ export interface Session {
     id?: string;
     voteSystem?: VoteSystem;
     name?: string;
+    reset?: boolean;
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, sequenceEqual } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Player } from '../app/models/player.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Session } from 'src/app/models/session.model';
@@ -17,17 +17,16 @@ export class UsersDbService {
   gameSessionsCollection: AngularFirestoreCollection<Session>;
   players$: Observable<Player[]>;
   currentGameSession: Session;
-
-
   currentPlayer$: Observable<Player>;
  
 
   constructor(afs: AngularFirestore,  private router : Router ) {
     this.afs = afs
     this.gameSessionsCollection = afs.collection<Session>('game-sessions')
-  
-    this.setGameSession() 
+    this.setGameSession()
   }
+
+ 
   setGameSession() {
     if (this.router.url !== '/' && this.router.url !== '/new-game') {
       const id = this.router.url
@@ -36,8 +35,16 @@ export class UsersDbService {
         this.currentGameSession = data
       })
       this.setPlayersObservable(id)
-      
+      this.watchReset(id)
     }
+  }
+  watchReset(id: string) {
+  this.gameSessionsCollection.doc(id).valueChanges()
+    .subscribe(data => {
+      if (data.reset === true) {
+        this.resetPlayerCard()
+      }
+    })
   }
   setPlayersObservable(id: string): void{
     this.players$ = this.afs.collection<Session>('game-sessions')
@@ -49,7 +56,7 @@ export class UsersDbService {
   }
   createGameSession(sessionName: string, system: VoteSystem): string {
     const id = this.afs.createId();
-    const gameSession: Session = {id, name: sessionName, voteSystem: system}
+    const gameSession: Session = {id, name: sessionName, voteSystem: system, reset: false}
     this.gameSessionsCollection.doc(id).set(gameSession)
     this.currentGameSession = gameSession
     this.setPlayersObservable(id)
@@ -86,18 +93,20 @@ export class UsersDbService {
       }
     } )
   }
-  // resetAllPlayers() {
-  //   this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').get()
-  //   }
+  resetAllPlayers() {
+    this.gameSessionsCollection.doc(this.currentGameSession.id).update({reset: true})
+    }
   resetPlayerCard(): void {
     let id: string;
     let subscription = this.currentPlayer$.subscribe(player => {
+      console.log('try to reset')
       id = player.id
       if (player.cardValue !== null) {
       console.log('reset user card')
       this.gameSessionsCollection.doc(this.currentGameSession.id).collection('players').doc(id).update({cardValue: null})
       }
       subscription.unsubscribe()
+      this.gameSessionsCollection.doc(this.currentGameSession.id).update({reset: false})
     })
   }
 }
