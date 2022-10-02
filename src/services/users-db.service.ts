@@ -28,7 +28,7 @@ export class UsersDbService {
 
  
   setGameSession() {
-    if (this.router.url !== '/' && this.router.url !== '/new-game') {
+    if (this.router.url !== '/planning-poker-app' && this.router.url !== '/planning-poker-app/new-game') {
       const id = this.router.url
       this.currentGameSession$ = this.gameSessionsCollection.doc(id).valueChanges()
       this.currentGameSession$.subscribe(data => {
