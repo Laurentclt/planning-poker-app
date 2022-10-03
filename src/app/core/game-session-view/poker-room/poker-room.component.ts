@@ -19,10 +19,12 @@ export class PokerRoomComponent implements OnInit {
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-      if (this.usersDbService.currentPlayer$ === undefined) {
-        this.closeModal = false
-      } else {
+      if (localStorage.getItem('user')) {
+        let currentUser: string = localStorage.getItem('user')
         this.closeModal = true
+        this.usersDbService.currentPlayer$ = this.usersDbService.gameSessionsCollection.doc(this.usersDbService.currentGameSession.id).collection('players').doc(currentUser).valueChanges()
+      } else {
+        this.closeModal = false
       }
     // this.usersDbService.currentPlayer$.subscribe(data => {
     //   if (data.id !== undefined) {

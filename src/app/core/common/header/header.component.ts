@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
   goToHome() {
     if (confirm("voulez vous retournez à la page d'accueil ? Cela quittera votre partie en cours")) {
-      this.router.navigateByUrl('/planning-poker-app/home')
+      this.router.navigateByUrl('')
     }
   }
  

@@ -28,7 +28,7 @@ export class UsersDbService {
 
  
   setGameSession() {
-    if (this.router.url !== '/planning-poker-app' && this.router.url !== '/planning-poker-app/new-game') {
+    if (this.router.url !== '/' && this.router.url !== '/new-game') {
       const id = this.router.url
       this.currentGameSession$ = this.gameSessionsCollection.doc(id).valueChanges()
       this.currentGameSession$.subscribe(data => {
@@ -69,11 +69,9 @@ export class UsersDbService {
     this.resetPlayerCard()
   }
   addUser(playerName: string): void {
-    // to do : first player created in the collection is admin
     console.log('adduser called', playerName)
     const playerId = this.afs.createId();
     const newPlayer: Player = { id: playerId, name: playerName, cardValue: null };
-    // this.currentUser = newPlayer
     localStorage.setItem('user', newPlayer.id)
     this.gameSessionsCollection.doc(this.currentGameSession.id).collection<Player>('players').doc(playerId).set(newPlayer)
     this.setCurrentPlayer(this.currentGameSession.id, playerId)
