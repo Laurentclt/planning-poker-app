@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Player } from 'src/app/models/player.model';
+
 
 import { UsersDbService } from 'src/services/users-db.service';
 
@@ -9,9 +11,9 @@ import { UsersDbService } from 'src/services/users-db.service';
   styleUrls: ['./poker-room.component.scss'],
 })
 export class PokerRoomComponent implements OnInit {
-  currentPlayer: Player;
+  currentPlayer$: Observable<Player>;
   playerName: string;
-  closeModal: boolean;
+  closeModalAskName: boolean;
   gameIsOver: boolean;
   isComponentReady: boolean = false;
   
@@ -19,33 +21,32 @@ export class PokerRoomComponent implements OnInit {
   constructor( private usersDbService: UsersDbService) {}
 
   ngOnInit() {
-      if (localStorage.getItem('user')) {
-        let currentUser: string = localStorage.getItem('user')
-        this.closeModal = true
-        this.usersDbService.currentPlayer$ = this.usersDbService.gameSessionsCollection.doc(this.usersDbService.currentGameSession.id).collection('players').doc(currentUser).valueChanges()
+        if (localStorage.getItem('userId')) {
+        this.closeModalAskName = true;
+        this.isComponentReady = true;
+        this.setCurrentPlayer()
       } else {
-        this.closeModal = false
-      }
-    // this.usersDbService.currentPlayer$.subscribe(data => {
-    //   if (data.id !== undefined) {
-    //     this.closeModal = false
-    //   } else {
-    //     this.closeModal = true
-    //   }
-    // })  
+        this.closeModalAskName = false;
+      }  
     this.showResults()
     this.resetView()
   }
   getPlayerName(playerName : string): void {
     this.playerName = playerName
-    this.closeModal = true
+    this.closeModalAskName = true
     this.usersDbService.addUser(playerName)
     this.setCurrentPlayer()
     this.isComponentReady = true;
   }
 
   setCurrentPlayer() {
-    this.usersDbService.currentPlayer$.subscribe(data => this.currentPlayer = data)
+    let currentUserId: string = localStorage.getItem('userId');
+    this.usersDbService.currentGameSession$.subscribe(data => {
+      let gameSessionId =  data.id
+      this.currentPlayer$ = this.usersDbService.gameSessionsCollection
+      .doc(gameSessionId).collection('players').doc(currentUserId).valueChanges();
+      this.usersDbService.currentPlayer$ = this.currentPlayer$
+    })
   }
   showResults() {
    this.usersDbService.currentGameSession$.subscribe(data => {

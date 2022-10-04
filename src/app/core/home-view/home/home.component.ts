@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.usersDbService.currentGameSession = {}
+    // problem here
     localStorage.removeItem('user')
    }
 

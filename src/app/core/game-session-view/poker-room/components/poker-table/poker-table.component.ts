@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
+import { Observable } from 'rxjs';
 import { UsersDbService } from '../../../../../../services/users-db.service';
 import { Player } from '../../../../../models/player.model';
 
@@ -9,7 +10,7 @@ import { Player } from '../../../../../models/player.model';
 })
 export class PokerTableComponent implements OnInit {
   @Input()
-  currentPlayer: Player;
+  currentPlayer$: Observable<Player>;
   @Input()
   gameIsOver: boolean;
 
@@ -64,8 +65,8 @@ export class PokerTableComponent implements OnInit {
     })
   }
   switchToButton(): void {
-    if (this.usersDbService.currentPlayer$ !== undefined) {
-    this.usersDbService.currentPlayer$.subscribe(data => {
+    if (this.currentPlayer$ !== undefined) {
+    this.currentPlayer$.subscribe(data => {
       if (data.cardValue !== null ) {
         this.buttonRevealCard = true
       } else {

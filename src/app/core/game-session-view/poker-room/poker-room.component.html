@@ -1,11 +1,11 @@
 <app-header></app-header>
-<app-modal-ask-name class="modal" (sendPlayerName)="getPlayerName($event)" *ngIf="!closeModal"></app-modal-ask-name>
+<app-modal-ask-name class="modal" (sendPlayerName)="getPlayerName($event)" *ngIf="!closeModalAskName"></app-modal-ask-name>
 <div class="container">
   <div class="poker-table">
-  <app-poker-table [currentPlayer]="currentPlayer" [gameIsOver]="gameIsOver" ></app-poker-table>
+  <app-poker-table [currentPlayer$]="currentPlayer$" [gameIsOver]="gameIsOver" ></app-poker-table>
   </div >
   <div *ngIf="isComponentReady" class="choose-card">
-  <app-choose-your-card *ngIf="!gameIsOver; else results" class="pick-card" [currentPlayer]="currentPlayer" > </app-choose-your-card>
+  <app-choose-your-card *ngIf="!gameIsOver; else results" class="pick-card" [currentPlayer$]="currentPlayer$" > </app-choose-your-card>
   </div>
   <ng-template #results><app-results ></app-results></ng-template>
 </div>
