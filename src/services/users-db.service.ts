@@ -27,7 +27,7 @@ export class UsersDbService {
   }
   
   setGameSession(): void {
-    if (this.router.url !== '/' && this.router.url !== '/new-game') {
+    if (this.router.url !== '/planning-poker-app' && this.router.url !== '/planning-poker-app/new-game') {
       console.log('passage ici');
       const id = this.router.url;
       this.currentGameSession$ = this.gameSessionsCollection.doc(id).valueChanges();

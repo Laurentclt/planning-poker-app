@@ -5,9 +5,12 @@ import { PokerRoomComponent } from './core/game-session-view/poker-room/poker-ro
 import { HomeComponent } from './core/home-view/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'new-game', component: ModalSetupSettingsComponent },
-  { path: ':id', component: PokerRoomComponent },
+  
+  { path: 'planning-poker-app', component: HomeComponent },
+  { path: 'planning-poker-app/new-game', component: ModalSetupSettingsComponent },
+  { path: 'planning-poker-app/:id', component: PokerRoomComponent },
+  { path : "", redirectTo: "/planning-poker-app"},
+  
 ];
 
 @NgModule({

@@ -29,7 +29,7 @@ export class ModalSetupSettingsComponent implements OnInit {
   createGameSession(sessionName: string ): void {
     if (sessionName !== '') {
       this.gameUrl = this.usersDbService.createGameSession(sessionName, this.systemSelected);
-    this.router.navigateByUrl(this.gameUrl);
+    this.router.navigateByUrl(`/planning-poker-app/${this.gameUrl}`);
     } else {
       alert('veuillez remplir tous les champs')
     }

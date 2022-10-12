@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
    }
 
   goToSettingsView() {
-  this.router.navigateByUrl('new-game')
+    console.log("clicked")
+    this.router.navigateByUrl('/planning-poker-app/new-game')
   }
 }
